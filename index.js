@@ -17,7 +17,7 @@ app.get('/', (request, response) => {
         software = software.slice(s + 1, e)
     }
 
-
+    response.setHeader('Content-Type', 'application/json')
     response.send(JSON.stringify({ip, language, software}))
 })
 
