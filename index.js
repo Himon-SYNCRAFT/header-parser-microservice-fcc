@@ -6,7 +6,11 @@ let app = express()
 const port = process.env.PORT || 3000
 
 app.get('/', (request, response) => {
-    let ip = request.ip
+    let ip = request.headers['x-forwarded-for'] ||
+        request.connection.remoteAddress ||
+        request.socket.remoteAddress ||
+        request.connection.socket.remoteAddress
+
     let language = request.get('Accept-Language').split(',').shift()
     let software = request.get('User-Agent')
 
